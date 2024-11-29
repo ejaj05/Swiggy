@@ -30,7 +30,7 @@ const RestaurantMenu = () => {
 
   const getDetails = async () => {
     const response = await fetch(
-      `/swiggy-api/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${cord.lat}&lng=${cord.lng}&restaurantId=${mainId}&catalog_qa=undefined&query=Biryani&submitAction=ENTER`
+      `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${cord.lat}&lng=${cord.lng}&restaurantId=${mainId}&catalog_qa=undefined&query=Biryani&submitAction=ENTER`
     );
     const jsonData = await response.json();
     setResInfo(jsonData?.data?.cards[2].card.card.info);
