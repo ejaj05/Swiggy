@@ -2,7 +2,7 @@ import React, {  useState } from 'react'
 import { IoMdStar } from "react-icons/io";
 
 import Button from './Button';
-const ItemDetails = ({item,idx}) => {
+const ItemDetails = ({item,resInfo}) => {
     const [toggle, setToggle] = useState(false);
     const veg = "https://foodandfusion.in/assets/icons/veg-symbol.png";
     const nonVeg = "https://foodandfusion.in/assets/icons/non-veg-symbol.png";
@@ -48,7 +48,7 @@ const ItemDetails = ({item,idx}) => {
                         alt=""
                     />
                     <button className="absolute bottom-[-18px] left-10 font-bold text-xl bg-white rounded-xl shadow-xl text-emerald-600 hover:bg-zinc-200 border border-zinc-300">
-                        <Button item={item} />
+                        <Button item={item.card.info} resInfo={resInfo}/>
                     </button>
                 </div>
             </div>

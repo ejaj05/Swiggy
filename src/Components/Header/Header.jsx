@@ -4,27 +4,30 @@ import { navLinks } from '../../utils/constant'
 import { Link } from 'react-router-dom'
 import { RxCross1 } from "react-icons/rx"
 import { UserContext } from '../../context/Context'
+import { useDispatch, useSelector } from 'react-redux'
+import { setIsOpen } from '../../utils/reducers/toggleSlice'
+import { setCord } from '../../utils/reducers/cordSlice'
 
 const Header = () => {
-  const { isOpen, setIsOpen,cord, setCord} = useContext(UserContext)
   const [serachResultData, setSearchResultData] = useState([])
-  const {cardData} = useContext(UserContext)
   const [address,setAddress] = useState("kolkata...")
+  const {isOpen} = useSelector(state => state.toggle)
+  const {cartData} = useSelector(state => state.cart)
+  const dispatch = useDispatch()
 
   const getAreaDetails = async (query)=>{
-    const res = await fetch(`https://www.swiggy.com/dapi/misc/address-recommend?place_id=${query}`)
+    const res = await fetch(`/swiggy-api/dapi/misc/address-recommend?place_id=${query}`)
     const data = await res.json()
-    setCord(data.data[0].geometry.location)
+    dispatch(setCord(data.data[0].geometry.location))
     setAddress(data.data[0].formatted_address)
-    setIsOpen(false)
+    dispatch(setIsOpen())
   }
-
   const getSearchResults = async (query) => {
     if(!query){
       setSearchResultData([])
       return 
     }
-    const result = await fetch(`https://www.swiggy.com/dapi/misc/place-autocomplete?input=${query}`)
+    const result = await fetch(`/swiggy-api/dapi/misc/place-autocomplete?input=${query}`)
     const data = await result.json()
     setSearchResultData(data.data)
   }
@@ -32,12 +35,12 @@ const Header = () => {
     <div className='relative'>
 
       <div>
-        <div onClick={() => setIsOpen(!isOpen)} className={`w-full h-[100vh] absolute top-0 left-0 bg-black/60 z-20 ${!isOpen && "hidden"}`}></div>
+        <div onClick={() => dispatch(setIsOpen())} className={`w-full h-[100vh] absolute top-0 left-0 bg-black/60 z-20 ${!isOpen && "hidden"}`}></div>
 
         <div className={`absolute top-0 left-0 px-12 z-50 bg-zinc-100 w-[580px] h-[100vh] ${!isOpen && "-translate-x-[100%]"} duration-500 ease-in-out`}>
           <div className='pl-28'>
             <div className='sticky top-0'>
-              <RxCross1 className='text-xl my-8 cursor-pointer' onClick={() => setIsOpen(!isOpen)} />
+              <RxCross1 className='text-xl my-8 cursor-pointer' onClick={() => dispatch(setIsOpen())} />
               <input onChange={(e) => getSearchResults(e.target.value)} className='w-full p-3 border border-zinc-400 outline-none shadow-xl font-medium text-lg' type='text' placeholder="search for area, street name" />
             </div>
 
@@ -61,7 +64,7 @@ const Header = () => {
             <Link to={'/'}>
               <img className='w-24' src="https://logos-world.net/wp-content/uploads/2020/11/Swiggy-Emblem.png" alt="" />
             </Link>
-            <h1 className='flex items-center  cursor-pointer' onClick={() => setIsOpen(!isOpen)}>
+            <h1 className='flex items-center  cursor-pointer' onClick={() => dispatch(setIsOpen())}>
               <p className='font-bold border-b-2 border-black hover:border-b-orange-500 hover:text-orange-500'>HOME</p>
               <p className='text-sm text-zinc-500 hover:text-zinc-400  ml-3 line-clamp-1 max-w-40'>{address}</p>
               <IoIosArrowDown className='text-xl mx-3 mt-1 text-orange-500 cursor-pointer' />
@@ -70,11 +73,11 @@ const Header = () => {
 
           <ul className='flex items-center gap-10'>
             {navLinks.map((item, idx) => (
-              <li key={idx} className='flex relative items-center hover:text-orange-600 text-zinc-600'>
+              <Link to={`${item.path}`} key={idx} className='flex relative items-center hover:text-orange-600 text-zinc-600'>
                 <span className='text-xl'>{item.icons}</span>
-                {item.name == 'cart' && <span className='relative top-1 right-0 rounded-full'>{cardData.length}</span>}
-                <Link to={`/${item.name}`} className=' text-lg font-semibold ml-2'>{item.name}</Link>
-              </li>
+                {item.name == 'cart' && <span className='relative top-1 right-0 rounded-full'>{cartData.length}</span>}
+                <span className=' text-lg font-semibold ml-2'>{item.name}</span>
+              </Link>
             ))}
           </ul>
         </div>

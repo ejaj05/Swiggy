@@ -7,10 +7,10 @@ import { FaShoppingCart } from "react-icons/fa";
 
 
 export const navLinks = [
-    {icons:<IoBagOutline/>,name:'search corporate'},
-    {icons:<CiSearch/>,name:'search'},
-    {icons:<BiSolidOffer/>,name:'special offers'},
-    {icons:<MdHelpOutline/>,name:'Help'},
-    {icons:<VscAccount/>,name:'sign in'},
-    {icons:<FaShoppingCart/>,name:'cart'},
+    {icons:<IoBagOutline/>,name:'search corporate',path:'/search-companies'},
+    {icons:<CiSearch/>,name:'search','path':'/search'},
+    {icons:<BiSolidOffer/>,name:'special offers',path:'/special-offers'},
+    {icons:<MdHelpOutline/>,name:'Help',path:'/help'},
+    {icons:<VscAccount/>,name:'sign in',path:'/sign'},
+    {icons:<FaShoppingCart/>,name:'cart',path:'/cart'},
 ]

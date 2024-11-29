@@ -3,7 +3,7 @@ import {Card, Top} from '../index'
 import { UserContext } from '../../context/Context'
 
 const Cards = () => {
-  const {data,setData} = useContext(UserContext)
+  const {data} = useContext(UserContext)
   const header = data[1]?.card?.card?.header?.title
   const item = data[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
   const [move, setMove] = useState(0);

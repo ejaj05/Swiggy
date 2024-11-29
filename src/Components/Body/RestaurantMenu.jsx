@@ -3,8 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { Offers, RestaurantDetails, Top } from "../index.js";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import MenuCard from "./MenuCard.jsx";
-import { UserContext } from "../../context/Context.jsx";
 import Button from "./Button.jsx";
+import { useSelector } from "react-redux";
 
 const RestaurantMenu = () => {
   const [size, setSize] = useState(0)
@@ -13,9 +13,7 @@ const RestaurantMenu = () => {
   const [topData, setTopData] = useState(null)
   const [move, setMove] = useState(0);
   const [discountData, setDiscountData] = useState([]);
-  const [quantity, setQuantity] = useState(0);
-  const { cord, cardData, setCardData } = useContext(UserContext)
-
+  const {cord} = useSelector(state => state.cord)
   const { id } = useParams();
   const mainId = id.split("-").at(-1).slice(4);
 
@@ -32,7 +30,7 @@ const RestaurantMenu = () => {
 
   const getDetails = async () => {
     const response = await fetch(
-      `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${cord.lat}&lng=${cord.lng}&restaurantId=${mainId}&catalog_qa=undefined&query=Biryani&submitAction=ENTER`
+      `/swiggy-api/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${cord.lat}&lng=${cord.lng}&restaurantId=${mainId}&catalog_qa=undefined&query=Biryani&submitAction=ENTER`
     );
     const jsonData = await response.json();
     setResInfo(jsonData?.data?.cards[2].card.card.info);
@@ -52,7 +50,6 @@ const RestaurantMenu = () => {
   useEffect(() => {
     getDetails();
   }, []);
-
   return (
     <div className="pt-24">
       <div className="w-[800px] mx-auto">
@@ -105,7 +102,7 @@ const RestaurantMenu = () => {
                       <div className="flex justify-between">
                         <p className="text-lg">₹{item?.dish?.info?.defaultPrice / 100 || item?.dish?.info?.price / 100}</p>
                         <button className="inline-block  font-bold text-xl bg-white rounded-xl shadow-xl text-emerald-600 hover:bg-zinc-200 border border-zinc-300">
-                          <Button item={item} index={idx} />
+                          <Button item={item.dish.info} resInfo={resInfo} />
                         </button>
                       </div>
                     </div>
@@ -115,7 +112,7 @@ const RestaurantMenu = () => {
             </div>
           )}
 
-          <MenuCard data={menuData} />
+          <MenuCard data={menuData} resInfo={resInfo}/>
 
         </div>
       </div>

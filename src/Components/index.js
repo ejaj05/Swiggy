@@ -10,7 +10,8 @@ import RestaurantMenu from "./Body/RestaurantMenu";
 import Offers from "./Body/Offers";
 import RestaurantDetails from "./Body/RestaurantDetails";
 import CardDetails from './Body/CardDetails'
+import Cart from "./Body/Cart";
 export {
-    Header,Searchbar,Body,Card,Restaurant,Navbar,Top,OnlineFood,RestaurantMenu,Offers,RestaurantDetails,CardDetails
+    Header,Searchbar,Body,Card,Restaurant,Navbar,Top,OnlineFood,RestaurantMenu,Offers,RestaurantDetails,CardDetails,Cart
 
 }
