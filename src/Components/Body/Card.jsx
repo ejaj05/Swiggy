@@ -3,7 +3,7 @@ import { IoStarSharp } from "react-icons/io5"
 import { Link } from "react-router-dom";
 const Card = ({ restaurant ,cta}) => {
   return (
-    <Link to={`/restaurantMenu/${cta?.link.split('/')[5]}`} className="shrink-0 w-[270px]  hover:scale-95 duration-300">
+    <Link to={`/restaurantMenu/${cta?.link.split('/')[5]}`} className="min-w-[270px]  hover:scale-95 duration-300">
       <div className="h-[188px] w-full rounded-xl overflow-hidden relative">
         <img
           className="w-full h-full object-cover object-top"

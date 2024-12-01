@@ -20,7 +20,8 @@ const Navbar = () => {
     }
   };
   return (
-    <div className="w-[100%]  mt-5 overflow-hidden">
+    <>
+      <div className="w-[100%]  mt-5 overflow-hidden hidden md:block">
       <Top title={header} move={move} handleMoveLeft={handleMoveLeft} handleMoveRight={handleMoveRight} length={4} />
       <div
         style={{ translate: `-${move * 34}%` }}
@@ -38,7 +39,27 @@ const Navbar = () => {
         ))}
       </div>
       <hr className="border mt-6" />
-    </div>
+      </div>
+      <div className="w-[100%]  mt-5 overflow-hidden block md:hidden">
+      <Top title={header} move={move} handleMoveLeft={handleMoveLeft} handleMoveRight={handleMoveRight} length={4} />
+      <div
+        style={{ translate: `-${move * 100}%` }}
+        className={`flex duration-300`}
+      >
+        {item?.map((item, idx) => (
+          <Link key={idx} className="min-w-32" to={`/restaurantMenu/${link[idx]?.cta?.link.split('/')[5]}`}>
+            <img
+              key={idx}
+              className={``}
+              src={`https://media-assets.swiggy.com/swiggy/image/upload/${item.imageId}`}
+              alt=""
+            />
+          </Link>
+        ))}
+      </div>
+      <hr className="border mt-6" />
+      </div>
+    </>
   );
 };
 

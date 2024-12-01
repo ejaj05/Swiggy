@@ -1,13 +1,12 @@
 import React, { useContext} from 'react'
 import { Body, Cart, Header, RestaurantMenu } from './Components'
 import { Route, Routes } from 'react-router-dom'
-import { UserContext } from './context/Context'
 import { useSelector } from 'react-redux'
-
 const App = () => {
   const {isOpen} = useSelector(state => state.toggle)
+  const {loginStatus} = useSelector(state => state.toggle)
   return (
-    <div className={`h-[100vh] ${isOpen && 'overflow-hidden'}`}>
+    <div className={`h-[100vh] ${isOpen || loginStatus ? 'overflow-hidden':'overflow-x-hidden'}`}>
       <Header/>
       <Routes>
         <Route path="/" element={<Body />} />

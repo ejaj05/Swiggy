@@ -19,7 +19,7 @@ const Body = () => {
 
   return (
     <div className="w-full pt-24">
-      <div className="w-[75%] m-auto">
+      <div className="w-[95%] md:w-[75%] m-auto">
         <Navbar />
         <Restaurant />
         <OnlineFood />

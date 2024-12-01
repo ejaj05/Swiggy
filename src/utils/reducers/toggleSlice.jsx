@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     isOpen : false,
+    loginStatus: false,
 }
 
 export const toggleSlice = createSlice({
@@ -11,8 +12,11 @@ export const toggleSlice = createSlice({
         setIsOpen: (state) => {
             state.isOpen = !state.isOpen
         },
+        setLoginStatus: (state) => {
+            state.loginStatus = !state.loginStatus
+        }
     },
 })
 
-export const { setIsOpen } = toggleSlice.actions
+export const {setLoginStatus, setIsOpen } = toggleSlice.actions
 export default toggleSlice.reducer
