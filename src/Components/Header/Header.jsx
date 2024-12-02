@@ -37,7 +37,7 @@ const Header = () => {
   }
 
   const getAreaDetails = async (query) => {
-    const res = await fetch(`/swiggy-api/dapi/misc/address-recommend?place_id=${query}`)
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/swiggy-api/dapi/misc/address-recommend?place_id=${query}`)
     const data = await res.json()
     dispatch(setCord(data.data[0].geometry.location))
     setAddress(data.data[0].formatted_address)
@@ -48,7 +48,7 @@ const Header = () => {
       setSearchResultData([])
       return
     }
-    const result = await fetch(`/swiggy-api/dapi/misc/place-autocomplete?input=${query}`)
+    const result = await fetch(`${import.meta.env.VITE_BASE_URL}/misc/place-autocomplete?input=${query}`)
     const data = await result.json()
     setSearchResultData(data.data)
   }

@@ -9,7 +9,7 @@ const Searchbar = () => {
   const [searchStatus, setSearchStatus] = useState(true)
 
   const getMenuDetails = async (query) => {
-    const res = await fetch(`https://www.swiggy.com/dapi/restaurants/search/suggest?lat=22.530777&lng=88.4022104&str=${query}&trackingId=null&includeIMItem=true`)
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/restaurants/search/suggest?lat=22.530777&lng=88.4022104&str=${query}&trackingId=null&includeIMItem=true`)
     const { data } = await res.json()
     setSuggestion(data?.suggestions)
   }
