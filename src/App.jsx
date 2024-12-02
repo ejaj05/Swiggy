@@ -1,5 +1,5 @@
 import React, { useContext} from 'react'
-import { Body, Cart, Header, RestaurantMenu } from './Components'
+import { Body, Cart, Header, RestaurantMenu, Searchbar, SearchData } from './Components'
 import { Route, Routes } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
         <Route path="/" element={<Body />} />
         <Route path='/restaurantMenu/:id' element={<RestaurantMenu />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/search' element={<Searchbar/>} ></Route>
       </Routes>
       
     </div>

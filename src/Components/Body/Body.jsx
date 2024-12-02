@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
-import { Restaurant, Navbar, Searchbar, OnlineFood } from "../index";
+import { Restaurant, Navbar, OnlineFood } from "../index";
 import { UserContext } from "../../context/Context";
+import Shimmer from "../Shimmer/Shimmer";
 
 const Body = () => {
   const { isServiceable } = useContext(UserContext)
+  const { data } = useContext(UserContext)
 
   if (!isServiceable) {
     return (
@@ -18,13 +20,17 @@ const Body = () => {
   }
 
   return (
-    <div className="w-full pt-24">
-      <div className="w-[95%] md:w-[75%] m-auto">
-        <Navbar />
-        <Restaurant />
-        <OnlineFood />
-      </div>
-    </div>
+    <>
+      {data.length > 0 ?
+        < div className="w-full pt-24">
+          <div className="w-[95%] md:w-[75%] m-auto">
+            <Navbar />
+            <Restaurant />
+            <OnlineFood />
+          </div>
+      </div >
+      : <Shimmer />}
+    </>
   );
 };
 

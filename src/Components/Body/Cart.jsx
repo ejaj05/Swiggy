@@ -43,7 +43,7 @@ const Cart = () => {
         )
     } else
         return (
-            <div className='w-[50%] h-[100vh] pt-24 m-auto'>
+            <div className='w-full md:w-[50%] h-[100vh] pt-24 px-4 m-auto'>
 
                 <div className='flex mt-8 gap-4'>
                     <div className='w-44 h-44 rounded-lg overflow-hidden'>
@@ -58,7 +58,7 @@ const Cart = () => {
                     {cartData.map((item, idx) => {
                         return <div key={idx} >
                             <div className="flex justify-between mt-[24px]">
-                                <div className="w-[70%]">
+                                <div className=" md:w-[70%]">
                                     <img
                                         className="w-5"
                                         src={`${item?.itemAttribute?.vegClassifier === "VEG"
@@ -84,13 +84,13 @@ const Cart = () => {
                                         }
 
                                     </span>
-                                    <div>
-                                        <p className="">{toggle ? item.description : item.description?.slice(0, 130)} </p>
+                                    <div className="hidden md:block">
+                                        <p>{toggle ? item.description : item.description?.slice(0, 130)} </p>
                                         {item.description?.length > 130 && <span onClick={() => setToggle(!toggle)} className="font-bold text-zinc-600 cursor-pointer">{toggle ? "less" : " ...more"}</span>}
                                     </div>
                                 </div>
 
-                                <div className="w-[25%] h-40 relative">
+                                <div className="w-44 h-40 relative">
                                     <img
                                         className="w-full h-full object-cover  rounded-2xl"
                                         src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,c_fit/${item.imageId}`}
@@ -106,7 +106,7 @@ const Cart = () => {
                     })}
                 
 
-                <hr className='border-2 border-black my-4' />
+                <hr className='border-2 border-black my-10' />
 
                 <div className='flex justify-between'>
                     <h1>Total price</h1>

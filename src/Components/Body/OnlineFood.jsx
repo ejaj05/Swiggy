@@ -9,12 +9,16 @@ import { setFilterVal } from '../../utils/reducers/filterSlice';
 
 const OnlineFood = () => {
   const { data } = useContext(UserContext)
-  const header = data[2]?.card?.card?.title
-  const item = data[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+  const H1 = data[2]?.card?.card?.header?.title;
+  const H2 = data.find((item)=>item?.card?.card?.id === 'popular_restaurants_title')?.card?.card?.title
+  const header = H1 || H2
+  const mainData = data.find((item) => item.card.card.id === 'restaurant_grid_listing')
+  const mainData2 = data.find((item) => item?.card?.card?.id === 'top_brands_for_you')
+
+  const item = mainData2?.card?.card?.gridElements?.infoWithStyle?.restaurants ||  mainData?.card?.card?.gridElements?.infoWithStyle?.restaurants
   
   const {filterVal} = useSelector(state => state.filter)
 
-  
   const dispatch = useDispatch()
 
   const btns = ['Filter', 'Sort By', 'Fast Delivery', 'New on Swiggy', 'Ratings 4.0+', 'Pure Veg', 'Offers', 'Rs. 300-Rs. 600', 'Less than Rs. 300']
@@ -38,8 +42,7 @@ const OnlineFood = () => {
         return true
     }
   })
-  console.log(filterData)
-
+  
   return (
     <div>
       <h1 className="font-bold text-2xl">{header}</h1>

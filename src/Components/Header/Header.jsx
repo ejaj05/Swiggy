@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { IoIosArrowDown } from "react-icons/io"
 import { navLinks } from '../../utils/constant'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { RxCross1 } from "react-icons/rx"
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsOpen, setLoginStatus } from '../../utils/reducers/toggleSlice'
@@ -19,8 +19,6 @@ const Header = () => {
   const { userData } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const { loginStatus } = useSelector(state => state.toggle)
-  console.log(loginStatus)
-
   const handleLogin = async () => {
     const { user } = await signInWithPopup(auth, provider)
     const userData = {
@@ -103,8 +101,8 @@ const Header = () => {
               item.name == 'sign in' ?
                 <li onClick={() => dispatch(setLoginStatus())} key={idx} className='flex cursor-pointer relative items-center hover:text-orange-600 text-zinc-600'>
 
-                  {userData ? <div className='h-8 w-8 rounded-full overflow-hidden'><img src={userData.photoURL} alt="" /></div> : <span className='text-xl'>{item.icons}</span>}
-                  <span className='hidden md:block text-lg font-semibold ml-2'>{userData ? userData.displayName : item.name}</span>
+                  {userData ? <span className='font-semibold'>Logout</span> : <span className='text-xl'>{item.icons}</span>}
+                  <span className='hidden md:block text-lg font-semibold ml-2'>{!userData && item.name}</span>
                 </li>
                 : <Link to={`${item.path}`} key={idx} className='flex relative items-center hover:text-orange-600 text-zinc-600'>
                   <span className='text-xl'>{item.icons}</span>

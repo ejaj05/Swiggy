@@ -4,8 +4,9 @@ import { UserContext } from '../../context/Context'
 
 const Cards = () => {
   const { data } = useContext(UserContext)
-  const header = data[1]?.card?.card?.header?.title
-  const item = data[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+  const header = data.find((item)=>item?.card?.card?.header?.title === 'Top restaurant chains in Kolkata')?.card?.card?.header?.title || "Top restaurant chains in Your area"
+  const mainData = data.find((item) => item.card.card.id === 'restaurant_grid_listing')
+  const item = mainData?.card?.card?.gridElements?.infoWithStyle?.restaurants
   const [move, setMove] = useState(0);
 
   const handleMoveRight = () => {

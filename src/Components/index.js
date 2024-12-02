@@ -12,7 +12,8 @@ import RestaurantDetails from "./Body/RestaurantDetails";
 import CardDetails from './Body/CardDetails'
 import Cart from "./Body/Cart";
 import Login from "./Header/Login.jsx";
+import SearchData from "./Body/SearchData.jsx";
 export {
-    Header,Searchbar,Body,Card,Restaurant,Navbar,Top,OnlineFood,RestaurantMenu,Offers,RestaurantDetails,CardDetails,Cart,Login
+    Header,Searchbar,Body,Card,Restaurant,Navbar,Top,OnlineFood,RestaurantMenu,Offers,RestaurantDetails,CardDetails,Cart,Login,SearchData
 
 }

@@ -9,7 +9,7 @@ const Context = (props) => {
 
   async function fetchData() {
     const data = await fetch(
-      `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${cord.lat}&lng=${cord.lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
+      `${import.meta.env.VITE_BASE_URL}/restaurants/list/v5?lat=${cord.lat}&lng=${cord.lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
     );
     const jsonData = await data.json();
     setData(jsonData?.data?.cards)

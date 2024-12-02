@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Top } from "../index";
 import { UserContext } from "../../context/Context";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const { data, setData } = useContext(UserContext)
+  const { data } = useContext(UserContext)
   const header = data[0]?.card?.card?.header?.title
-  const item = data[0]?.card?.card?.imageGridCards?.info
+  const mainData = data.find((item) => item?.card?.card?.id === 'whats_on_your_mind')
+  const item = mainData?.card?.card?.imageGridCards?.info
   const [move, setMove] = useState(0);
   const link = data[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
   const handleMoveRight = () => {
@@ -19,6 +20,9 @@ const Navbar = () => {
       setMove(move + 1);
     }
   };
+  if(!item) {
+    return 
+  }
   return (
     <>
       <div className="w-[100%]  mt-5 overflow-hidden hidden md:block">

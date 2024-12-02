@@ -12,6 +12,7 @@ export const resSlice = createSlice({
         },
         resetRes: (state) => {
             state.isSameRes = true;
+            localStorage.removeItem('resInfo')
         }
     }
 })

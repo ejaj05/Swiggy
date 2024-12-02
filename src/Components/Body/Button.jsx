@@ -5,16 +5,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../../utils/reducers/cartSlice';
 import toast from 'react-hot-toast';
 import { checkRes } from '../../utils/reducers/resSlice';
+import { setLoginStatus } from '../../utils/reducers/toggleSlice';
 
 const Button = ({ item, resInfo = "" }) => {
     const [quantity, setQuantity] = useState(0);
     const { cartData } = useSelector(state => state.cart)
+   
     
     const dispatch = useDispatch()
 
     const getResInfo = JSON.parse(localStorage.getItem('resInfo')) || [];
+    const userData = JSON.parse(localStorage.getItem('userData')) || null
 
     const addItem = () => {
+        if(!userData){
+            dispatch(setLoginStatus())
+            toast.error("Please login to add items to cart")
+            return
+        }
         const isAdded = cartData.find(data => data.id === item.id)
         if (!isAdded) {
             if (getResInfo.name == resInfo.name || getResInfo.length == 0) {
