@@ -12,6 +12,7 @@ const SearchData = ({ query }) => {
     const [dishes, setDishes] = useState([])
     const [resData, setResData] = useState([])
     const [activeBtn, setActiveBtn] = useState('Dishes')
+    const {cord} = useSelector(state = state.cord)
 
     const {isSameRes} = useSelector(state => state.res)
     const {cartData} = useSelector(state => state.cart)
@@ -24,13 +25,13 @@ const SearchData = ({ query }) => {
     const nonVeg = "https://foodandfusion.in/assets/icons/non-veg-symbol.png";
 
     const getDishesData = async () => {
-        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/restaurants/search/v3?lat=22.530777&lng=88.4022104&str=${query}&trackingId=undefined&submitAction=SUGGESTION&queryUniqueId=df1d252d-6991-69db-68a7-920df7dc1ab2&metaData=%7B%22type%22%3A%22DISH%22%2C%22data%22%3A%7B%22vegIdentifier%22%3A%22NONVEG%22%2C%22cloudinaryId%22%3A%22Autosuggest%2FTop%2520200%2520queries%2FChicken.png%22%7D%2C%22businessCategory%22%3A%22SWIGGY_FOOD%22%2C%22displayLabel%22%3A%22Dish%22%7D`)
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/restaurants/search/v3?lat=${cord.lat}&lng=${cord.lng}&str=${query}&trackingId=4836a39e-ca12-654d-dc3b-2af9d645f8d7&submitAction=ENTER&queryUniqueId=7abdce29-5ac6-7673-9156-3022b0e032f0`)
         const { data } = await res.json()
         setDishes(data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards)
     }
 
     const getResData = async () => {
-        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/restaurants/search/v3?lat=22.530777&lng=88.4022104&str=${query}&trackingId=undefined&submitAction=SUGGESTION&queryUniqueId=27c32bca-b9dd-5841-c650-bc4d5c15a4a5&metaData=%7B%22type%22%3A%22DISH%22%2C%22data%22%3A%7B%22vegIdentifier%22%3A%22NA%22%2C%22cloudinaryId%22%3A%22btrmbvwdfin5wp4dw1v7%22%2C%22dishFamilyId%22%3A%22846516%22%2C%22dishFamilyIds%22%3A%5B%22846516%22%5D%7D%2C%22businessCategory%22%3A%22SWIGGY_FOOD%22%2C%22displayLabel%22%3A%22Dish%22%7D&selectedPLTab=RESTAURANT`)
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/restaurants/search/v3?lat=${cord.lat}&lng=${cord.lng}&str=${searchQuery}&trackingId=4836a39e-ca12-654d-dc3b-2af9d645f8d7&submitAction=ENTER&queryUniqueId=7abdce29-5ac6-7673-9156-3022b0e032f0&selectedPLTab=RESTAURANT`)
         const { data } = await res.json()
         setResData(data?.cards[0]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards)
     }
@@ -52,7 +53,7 @@ const SearchData = ({ query }) => {
         <>
             <div className='flex gap-2 mt-8 mb-2'>
                 {btns.map((btn, idx) => (
-                    <button onClick={() => handleBtnClick(btn)} key={idx} className={`px-4 py-2 border border-zinc-400 rounded-full text-sm font-semibold bg-white flex items-cente ${activeBtn == btn && "bg-[#3E4152] text-white"}`}>
+                    <button onClick={() => handleBtnClick(btn)} key={idx} className={`px-4 py-2 border border-zinc-400 rounded-full text-sm font-semibold  flex items-center ${activeBtn == btn && "bg-[#3E4152] text-white"}`}>
                         {btn}
                     </button>
                 ))}
