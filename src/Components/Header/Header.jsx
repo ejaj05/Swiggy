@@ -37,7 +37,7 @@ const Header = () => {
   }
 
   const getAreaDetails = async (query) => {
-    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/swiggy-api/dapi/misc/address-recommend?place_id=${query}`)
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/misc/address-recommend?place_id=${query}`)
     const data = await res.json()
     dispatch(setCord(data.data[0].geometry.location))
     setAddress(data.data[0].formatted_address)
@@ -81,7 +81,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className='w-full fixed top-0 left-0 bg-white z-10 shadow-md flex justify-center h-24  items-center pr-4'>
+      <div className='w-full fixed top-0 left-0 bg-white z-10 shadow-md flex justify-center h-24  items-center pr-7'>
         <div className='w-full md:w-[70%] flex justify-between'>
           <div className='flex items-center gap-3'>
             <Link to={'/'}>

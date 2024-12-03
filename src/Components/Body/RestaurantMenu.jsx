@@ -47,17 +47,14 @@ const RestaurantMenu = () => {
       `${import.meta.env.VITE_BASE_URL}/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${cord.lat}&lng=${cord.lng}&restaurantId=${mainId}&catalog_qa=undefined&query=Biryani&submitAction=ENTER`
     );
     const jsonData = await response.json();
-    console.log(jsonData?.data.cards);
     setResInfo(jsonData?.data?.cards[2].card.card.info);
     setDiscountData(
       jsonData?.data?.cards[3].card.card.gridElements?.infoWithStyle?.offers
     );
     const actualTop = jsonData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter((item, idx) => item.card.card.title == 'Top Picks') || []
-    console.log(actualTop)
     setTopData(actualTop[0]?.card?.card);
     setSize(actualTop[0]?.card?.card?.carousel?.length - 2)
     const mainData = jsonData?.data.cards?.find((item, idx) => item?.groupedCard?.cardGroupMap?.REGULAR)?.groupedCard?.cardGroupMap.REGULAR.cards
-    console.log(mainData)
     const actualMenu =
       mainData.filter(
         (item, idx) => item.card?.card?.itemCards || item.card?.card?.categories

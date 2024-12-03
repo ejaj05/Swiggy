@@ -2,7 +2,6 @@ import React from 'react'
 
 const Shimmer = () => {
     const arr = new Array(10)
-    console.log(arr.length)
     return (
         <div className='mt-24 h-[100vh]'>
             <div className='w-full h-[40vh] bg-slate-800 flex justify-center items-center flex-col gap-5'>
